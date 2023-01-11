@@ -14,10 +14,15 @@ jobs:
           java-version: 1.8
 
       - name: Build
-        run: |
-          ./mvnw clean package -DskipTests -T 1C -pl \
+
+        run: ./mvnw clean package -DskipTests -T 1C -pl \
           taier-data-develop,\
           taier-common,\
           taier-worker/taier-worker-plugin,\
           taier-datasource/taier-datasource-plugin \
           -am -amd
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: buildTaier
+          path: buildTaier-*.zip
